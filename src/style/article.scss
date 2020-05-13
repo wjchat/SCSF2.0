@@ -45,4 +45,27 @@
             font-size: $giantText;
         }
     }
+    .scrollDown{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        justify-content: flex-end;
+        pointer-events: none;
+        &>*{
+            box-sizing: content-box;
+            padding: 0 .3vw;
+        }
+        img{
+            object-fit: cover;
+            width: 1.4vw;
+            margin: auto;
+        }
+        h3{
+            @include bodyText;
+            font-size: 1.5vw;
+            font-style: italic;
+            color: $greyX;
+        }
+    }
 }

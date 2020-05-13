@@ -19,7 +19,7 @@
             width: 80%;
         }
         .volumes{
-            width: 100%;
+            width: fit-content;
             ul{
                 display: flex;
                 justify-content: flex-start;
@@ -35,7 +35,7 @@
                 }
             }
             .border{
-                width: 66%;
+                width: 19.5vw;
                 margin-top: auto;
                 height: 2px;
                 border-radius: 1px;

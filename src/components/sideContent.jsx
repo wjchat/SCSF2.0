@@ -8,7 +8,7 @@ import { Link } from "gatsby";
 
 const NavSection = props =>{
     let animate
-    let duration = .3
+    let duration = props.duration
     const [message, updateMessage] = useState("So Close So Far");
     useEffect(()=>{
         if(props.scrollState === "top"){
@@ -72,21 +72,25 @@ const SideContent = props => {
     let heightDiv
     const [scrollState, updateScrollState] = useState("top");
     const [articleHeight, updateArticleHeight] = useState(null)
-    const [percent, updatePercent] = useState(0);
-    const [divHeight, updateDivHeight] = useState(0)
+    const [divHeight, updateDivHeight] = useState(null)
+    const [container, updateContainer] = useState(null)
+    const duration = .3
     useEffect(()=>{
         updateDivHeight(heightDiv.offsetHeight)
     }, [heightDiv])
     return(<div ref ={div=>heightDiv=div} className = "sideContentContainer">
-        <NavSection scrollState = {scrollState} /> 
-        <Article 
-        updateArticleHeight = {(number) => updateArticleHeight(number)}
-        updatePercent = {(newPercent)=>updatePercent(newPercent)}
-        updateScrollState = {(newState)=>updateScrollState(newState)} />
         <ScrollBar 
+        container = {container}
         divHeight = {divHeight}
-        percent = {percent}
         height = {articleHeight} />
+        <NavSection 
+        duration = {duration}
+        scrollState = {scrollState} /> 
+        <Article 
+        duration = {duration}
+        updateContainer = {(contain)=>updateContainer(contain)}
+        updateArticleHeight = {(number) => updateArticleHeight(number)}
+        updateScrollState = {(newState)=>updateScrollState(newState)} />
     </div>)
 }
 
