@@ -25,8 +25,9 @@
             display: inline-block;
             position: relative;
             text-align: left;
-            font-size: 3.2vw;
-            font-family: balboa;
+            font-size: 3vw;
+            font-family: $sans;
+            font-weight: 800;
             color: $greyX;
             .enterClick{
                 cursor: pointer;
