@@ -1,0 +1,32 @@
+@import "global";
+
+.main{
+    height: 100vh;
+    width: 100vw;
+    background-color: $background;
+    position: relative;
+    display: grid;
+    grid-template-rows: 10% 80% 10%;
+    grid-template-columns: 30% 70%;
+    grid-template-areas: 
+        "topNav topNav"
+        "sideContent video"
+        "footer footer";
+    box-sizing: border-box;
+    padding: 2vh 2vw;
+    &> div{
+//        border: solid red 1px;
+    }
+    .topNav{
+        grid-area: topNav;
+    }
+    .sideContent{
+        grid-area: sideContent;
+    }
+    .video{
+        grid-area: video;
+    }
+    .footer{
+        grid-area: footer;
+    }
+}

@@ -1,0 +1,49 @@
+@import "global";
+
+.sideContentContainer{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    //DO NOT SET A HEIGHT ATTRIBUTE!
+    .navSection{
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: $background;
+        z-index: 2;
+        pointer-events: none;
+        h1{
+            font-size: $giantText;
+            font-family: $sans;
+            color: $goldX;
+            width: 80%;
+        }
+        .volumes{
+            width: 100%;
+            ul{
+                display: flex;
+                justify-content: flex-start;
+                padding: 2vh 0;
+                flex-wrap: wrap; //can fit 5 vols per row
+                pointer-events: all;
+                li{
+                    font-size: $bodyText;
+                    font-family: $sans;
+                    color: $greyX;
+                    list-style: none;
+                    padding-right: 2vw;
+                }
+            }
+            .border{
+                width: 66%;
+                margin-top: auto;
+                height: 2px;
+                border-radius: 1px;
+                background-color: $goldX;
+            }
+        }
+    }
+    .unclickable ul{
+        pointer-events: none !important;
+    }
+}
