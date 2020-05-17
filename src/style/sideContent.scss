@@ -23,12 +23,12 @@
             ul{
                 display: flex;
                 justify-content: flex-start;
-                padding: 2vh 0;
+                padding: 3vh 0 1vh;
                 flex-wrap: wrap; //can fit 5 vols per row
                 pointer-events: all;
                 li{
                     font-size: $bodyText;
-                    font-family: $sans;
+                    font-family: $serrif;
                     color: $greyX;
                     list-style: none;
                     padding-right: 2vw;

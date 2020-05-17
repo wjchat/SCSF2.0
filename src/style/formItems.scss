@@ -6,7 +6,7 @@ $formFontSize: 1.4vw;
     //dont change styles of flexbox here. just used as an indentifier. to change flexbox styles go to submission.scss
     & > div {
         //container of each element
-        margin: 2% 0; //adjust space between boxes
+        margin: 4% 0; //adjust space between boxes
         width: 100%;
         height: $formFontSize * 2.3;
         position: relative;
@@ -104,7 +104,7 @@ $formFontSize: 1.4vw;
         position: absolute;
         top: 35%;
         height: 30%;
-        right: -1 * $formFontSize * 1.5;
+        right: -1 * $formFontSize * 2.5;
         transform: translateX(-10px);
         cursor: pointer;
         filter: blur(4px);
@@ -134,10 +134,10 @@ $formFontSize: 1.4vw;
       top: 100%;
       width: 100%;
       color: $greyX;
-      text-align: center;
+      text-align: left;
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      justify-content: left;
       cursor: default;
       border: none;
   }

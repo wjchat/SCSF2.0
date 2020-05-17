@@ -53,12 +53,15 @@ const Article = props =>{
       ref = {div=>scroll=div}
         className = "articleContainer">
        <div className = "scrollDown">
-           <h3>Scroll Down</h3>
+           <h3></h3>
            <img src={Arrow} alt="scroll Down"/>
        </div>
        <div className = "heightContainer">
             <h2><span>{title} </span>// {subject}</h2>
             <div className = "article">{words}</div>
+            <div className = "caption">
+              We will be using the videos and images submitted to create an audio/visual journal for and by all of us
+            </div>
             <div className = "formContain">
                 <Form />
             </div>
