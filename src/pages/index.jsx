@@ -15,7 +15,7 @@ import { TransitionPortal } from "gatsby-plugin-transition-link";
 import { CSSPlugin } from 'gsap/CSSPlugin'
 
 
-// Force CSSPlugin to not get dropped during build
+// Force CSSPlugin to not get dropped during builds
 gsap.registerPlugin(CSSPlugin)
 
 
