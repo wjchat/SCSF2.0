@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react';
 import "../style/article.scss"
 import Form from './form.jsx'
-import Arrow from '../images/arrow.svg'
+import Arrow from '../images/Arrow.svg'
 import {gsap, Power3} from "gsap"
 import axios from "axios"
 
