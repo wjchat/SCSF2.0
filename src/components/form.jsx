@@ -8,7 +8,7 @@ import { gsap, Power2 } from 'gsap'
 import { CSSPlugin } from 'gsap/CSSPlugin'
 import axios from 'axios'
 
-const localURL = "http://localhost:1337"
+const localURL = "https://scsf.herokuapp.com/"
 
 
 
@@ -126,15 +126,17 @@ const FormContainer = props => {
             })
             fileItems.push(upload_res.data[0])
         }
+        console.log(fileItems[0])
         const userUpload = await axios({
             method: "POST",
             url: localURL + "user-uploads",
             data: {
                 email: email,
-                content: fileItems
+                files: fileItems
             }
         })
         updateMessage("Uploaded!")
+        props.updateCount(props.count + 1)
         updateFile(null)
     }
 

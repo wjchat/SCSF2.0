@@ -6,11 +6,14 @@ import Landing from "../components/landing.jsx"
 import SubmissionPage from "../components/submission.jsx"
 import Mobile from '../components/mobile.jsx'
 import Logo from "../images/Matte.svg"
-import { TimelineMax, TweenLite } from "gsap"
+import { TimelineMax, TweenLite, gsap, Power3 } from "gsap"
 import "../style/loader.scss"
-import { Link } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
+import TransitionLink from "gatsby-plugin-transition-link"
+import { TransitionPortal } from "gatsby-plugin-transition-link";
 
-import { gsap } from 'gsap'
+
+const duration = 1;
 
 const DotDotDot = () =>{
     let animate
@@ -35,7 +38,16 @@ const DotDotDot = () =>{
     </span>)
 }
 const EnterButton = props => {
+    const data = useStaticQuery(graphql`
+    query CountQueryFront{
+      allStrapiVolume {
+        totalCount
+      }
+    }
+`)
+    
     let enterButton
+    let animate
     const [isHovering, toggleHover] = useState(false)
     useEffect(() => {
         if(!isHovering){
@@ -59,10 +71,6 @@ const EnterButton = props => {
         }, 500)
         }
     })
-    const handleClick = useCallback(()=>{
-        props.onClick();
-    })
-    
     return (
         <h1 ref={div => (enterButton = div)} className={props.className}>
             <span
@@ -70,9 +78,19 @@ const EnterButton = props => {
                 onMouseOver={() => toggleHover(true)}
                 onMouseLeave={() => toggleHover(false)}
             >
-                <Link to = "/revised">enter</Link>
+                <TransitionLink 
+                exit = {{
+                        length: duration * 2.5, 
+                        trigger: ()=> props.changePage(true),
+                    }}
+                entry ={{
+                        delay: duration,
+                    }}
+                to = {`/volume/${data.allStrapiVolume.totalCount}`
+                     }>enter</TransitionLink>
             </span>
             {isHovering ? <DotDotDot /> : <span className="first"> . </span>}
+            
         </h1>
     )
 }
@@ -102,20 +120,14 @@ const OpeningAnimation = props => {
             `+=.4`
         )
     }, [])
-    const handleClick = useCallback(()=>{
-        TweenLite.to(background, .4,{
-            opacity: 0,
-        })
-        setTimeout(()=>{
-            props.onClick("firstMain")
-        }, 450)
-    })
     return (
         <div ref = {div=>background=div} className="loadingAnimate">
             <div ref={div => (animate = div)}>
                 <img src={Logo} alt="Matte" />
                 {showEnter ? (
-                    <EnterButton className="enter" />
+                    <EnterButton 
+                    changePage = {(bool)=>props.changePage(bool)}
+                    className="enter" />
                 ) : (
                     <EnterButton className="enter hide" />
                 )}
@@ -126,8 +138,40 @@ const OpeningAnimation = props => {
 /////
 
 const Index = props =>{
-    return(<div>
-        <OpeningAnimation />
+    let animate
+    let fade
+    const [trigger, changePage] = useState(false);
+
+    useEffect(()=>{
+        if(animate!=null && fade != null){
+            if(trigger){
+                let tl = gsap.timeline();
+                tl.to(fade, duration * .6, {
+                    opacity: 0,
+                })
+                tl.set(animate,{
+                    width: "100vw",
+                    ease: Power3.easeIn
+                })
+                tl.set(animate,{
+                    left: "auto",
+                    right: 0,
+                })
+                tl.to(animate, duration, {
+                    width: "0vw",
+                    ease: Power3.easeOut,
+                }, `+=${duration * .6}`)
+            }
+        }
+    }, [trigger, animate, fade])
+    return(<div >
+       <div ref = {div=>fade=div}>
+            <OpeningAnimation
+            changePage = {(bool)=>changePage(bool)} />
+       </div>
+        <TransitionPortal level = "top">
+                <div ref = {div=>animate=div} className = "animationScreen"></div>
+        </TransitionPortal>
     </div>)
 }
 

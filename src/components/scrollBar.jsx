@@ -6,6 +6,7 @@ const Scrolly = props =>{
     let animate
     const [tween, updateTween] = useState(null)
     const[container, updateContainer] = useState(null);
+
     useEffect(()=>{
         let height = 80000 / props.height;
         gsap.set(animate,{
@@ -23,7 +24,6 @@ const Scrolly = props =>{
         if(props.container !=null && props.height != null && props.divHeight != null && tween != null){
                 props.container.addEventListener("scroll", ()=>{
                     tween.progress((props.container.scrollTop.toFixed(5) / (props.height -props.divHeight ).toFixed(6)) ) 
-                    console.log((props.container.scrollTop.toFixed(5) / (props.height -props.divHeight ).toFixed(6)) )
             })
         }
     }, [props.container, props.height, props.divHeight, tween])

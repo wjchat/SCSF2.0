@@ -10,8 +10,13 @@
     &::-webkit-scrollbar {
         display: none;
     }
+    img{
+        max-width: 90%;
+        max-height: 100%;
+    }
     .heightContainer{
         border: solid transparent 1px; //KEEP THIS idk why but for some reason it solves a problem
+        height: fit-content;
     }
     h2{
         margin-top: calc(16vh + 35%);

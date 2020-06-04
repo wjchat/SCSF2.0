@@ -1,6 +1,6 @@
-require("dotenv").config({  
-  path: `.env.${process.env.NODE_ENV}`,
-})
+//require("dotenv").config({  
+//  path: `.env.${process.env.NODE_ENV}`,
+//})
 
 module.exports = {
 pathPrefix: "/so-close-so-far-deploy",
@@ -18,9 +18,20 @@ pathPrefix: "/so-close-so-far-deploy",
         name: `images`,
         path: `${__dirname}/src/images`,
       },
+      resolve: "gatsby-source-strapi",
+      options: {
+        apiURL: "https://scsf.herokuapp.com",
+        contentTypes: [
+//           List of the Content Types you want to be able to request from Gatsby.
+          "volume",
+        ],
+        singleTypes: [`about`],
+        queryLimit: 1000,
+      },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-transition-link`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

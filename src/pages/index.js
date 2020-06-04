@@ -13,6 +13,8 @@ import "../style/loader.scss"
 import axios from 'axios'
 import { CSSPlugin } from 'gsap/CSSPlugin'
 
+import { Link } from "gatsby"
+
 
 
 // Force CSSPlugin to not get dropped during build

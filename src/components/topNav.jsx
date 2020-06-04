@@ -2,8 +2,17 @@ import React,{useState, useEffect} from 'react';
 import "../style/topNav.scss";
 import Logo from '../images/Matte.svg';
 import gsap from 'gsap'
+import{ useStaticQuery, graphql } from 'gatsby'
 
 const TopNav = props =>{
+    const data = useStaticQuery(graphql`
+    query AboutQuery {
+      strapiAbout {
+        text
+      }
+    }
+`)
+    const aboutText = data.strapiAbout.text
     const [showAbout, updateShow] = useState(false);
     let animate
     useEffect(()=>{
@@ -29,7 +38,7 @@ const TopNav = props =>{
             </a>
         </div>
         <div ref = {div=>animate=div} className = "aboutText">
-            <div>ABOUT TEXT WILL GO HERE WHATEVER IT IS ABOUT TEXT WILL GO HERE WHATEVER IT ISABOUT TEXT WILL GO HERE WHATEVER IT ISABOUT TEXT WILL GO HERE WHATEVER IT ISABOUT TEXT WILL GO HERE WHATEVER IT IS</div>
+            <div>{aboutText}</div>
         </div>
     </div>)
 }

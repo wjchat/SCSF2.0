@@ -17,7 +17,7 @@
             position: relative;
             width: 30vw;
             opacity: 0;
-            filter: blur(4px);
+//            filter: blur(4px);
             transform: translateX(-0%) scale(0.9);
         }
         .enter{
@@ -46,6 +46,14 @@
             visibility: hidden;
         }
     }
+}
+.animationScreen{
+        height: 100vh;
+        width: 0vw;
+        position: fixed;
+        background-color: $background;
+        top: 0;
+        left: 0;
 }
 
 .desktop{

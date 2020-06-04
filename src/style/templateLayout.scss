@@ -16,6 +16,7 @@
     padding: 2vh 2vw;
     &> div{
 //        border: solid red 1px;
+//        position: relative;
     }
     .topNav{
         grid-area: topNav;
@@ -24,13 +25,25 @@
     .sideContent{
         grid-area: sideContent;
         padding-left: 5%;
+        position: relative;
         // background-color: red;
     }
     .video{
         grid-area: video;
         padding-right: 2%;
+        position: relative;
     }
     .footer{
         grid-area: footer;
     }
+
+}
+.pageTrans{
+        height: 100vh;
+        width: 0vw;
+        position: fixed;
+        background-color: $background;
+        top: 0;
+        left: 0;
+        z-index: 500;
 }
