@@ -26,7 +26,7 @@ const Page = props => {
                 />
             </div>
             <div className="video">
-                <Video video={props.volume.video.absolutePath} />
+                <Video video={props.volume.video.relativePath} />
                 <PageTransition 
                 delayIn = {.2}
                 delayOut = {.2}

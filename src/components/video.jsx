@@ -1,6 +1,5 @@
 import React,{useEffect} from 'react';
 import "../style/video.scss"
-import vidSource from '../images/reel.mp4'
 
 const Video = props =>{
     let vid
@@ -14,7 +13,7 @@ const Video = props =>{
     }, [vid])
     return(
     <div className = "videoContainer">
-        <video ref = {video=>vid=video} controls src={vidSource}></video>
+        <video ref = {video=>vid=video} controls src={props.video}></video>
     </div>
     )
 }

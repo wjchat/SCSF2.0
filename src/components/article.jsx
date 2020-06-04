@@ -1,5 +1,4 @@
 import React,{useEffect, useState} from 'react';
-import words from './articleText.js'
 import "../style/article.scss"
 import Form from './form.jsx'
 import Arrow from '../images/arrow.svg'
