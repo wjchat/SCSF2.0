@@ -1,0 +1,58 @@
+@import "global";
+
+.MobSubmissionContainer {
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  
+
+  .title {
+    font-family: $sans;
+    font-size: 15vw;
+    text-align: center;
+    color: $goldX;
+  }
+
+  .line {
+    position: relative;
+    height: 0.3vh;
+    width: 45vw;
+    background-color: $goldX;
+    margin-top: 3.5vh;
+    left: 27.5vw;
+  }
+
+  .caption {
+    padding-left: 8vw;
+    padding-right: 8vw;
+    text-align: center;
+    margin-top: 6vw;
+    font-family: $serrif;
+    font-size: 4.5vw;
+    line-height: 1.5;
+  }
+
+  .form {
+    position: relative;
+    height: 100%;
+    width: 84vw;
+    left: 8vw;
+    // background-color: blue;
+    margin-top: 10vw;
+  }
+
+  .counter {
+    text-align: center;
+    font-family: $serrif;
+    font-size: 4.5vw;
+    &>span {
+      font-family: $sans;
+      font-size: 15vw;
+      color: $goldX;
+    }
+  }
+}

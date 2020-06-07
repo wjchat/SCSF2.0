@@ -1,3 +1,5 @@
+@import "global";
+
 .videoContainer{
     height: 100%;
     width: 100%;
@@ -8,5 +10,16 @@
         &:focus{
             outline: none !important;
         }
+    }
+
+    @media (max-width: $mobile-width) {
+      video{
+        object-fit: contain;
+        height: 100%;
+        width: 100%;
+        &:focus{
+            outline: none !important;
+        }
+    }
     }
 }
