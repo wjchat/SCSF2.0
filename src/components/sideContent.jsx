@@ -29,25 +29,13 @@ const ListItem = props =>{
                         delay: .9,
                     }}
             className = "link"
-            activeClassName = "active" to = {`/volume/${props.item.strapiId}`}>Vol {props.item.strapiId}</TransitionLink>
+            activeClassName = "active" to = {`/volume/${props.item.strapiId}`}>Vol. {props.item.strapiId}</TransitionLink>
           </li>
     </div>)
 }
 const NavSection = props =>{
-    const data = useStaticQuery(graphql`
-        query CountQuery {
-          allStrapiVolume(sort: {fields: strapiId, order: ASC}) {
-            edges {
-              node {
-                Title
-                strapiId
-              }
-            }
-          }
-        }
-`)
     let duration = props.duration
-    const items = data.allStrapiVolume.edges
+    const items = props.volumesCount
     let animate
     let titleRef
     const [message, updateMessage] = useState("So Close So Far");
@@ -177,6 +165,7 @@ const SideContent = props => {
         divHeight = {divHeight}
         height = {articleHeight} />
         <NavSection
+        volumesCount = {props.volumesCount}
         durationPage = {props.duration}
         duration = {duration}
         changePage = {(bool)=>props.changePage(bool)}

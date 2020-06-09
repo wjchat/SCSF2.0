@@ -9,7 +9,7 @@ import ReactMarkdown from "react-markdown"
 import Moment from "react-moment"
 
 
-const localURL = "https://scsf.herokuapp.com/"
+const api = "https://scsf.herokuapp.com/"
 
 
 const Article = props =>{
@@ -24,7 +24,7 @@ const Article = props =>{
             let ting = scrollRef
             setTimeout(()=>{
                 updateScroll(ting)
-                    axios.get(localURL+'user-uploads/count')
+                    axios.get(api+'user-uploads/count')
                       .then(function (response) {
                         updateCount(response.data);
                       })

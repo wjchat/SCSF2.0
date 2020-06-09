@@ -1,6 +1,6 @@
 @import "global";
 
-.desktop{
+.main{
     height: 100vh;
     width: 100vw;
     background-color: $background;
@@ -36,9 +36,7 @@
     .footer{
         grid-area: footer;
     }
-    @media (max-width: $mobile-width) {
-      display: none;
-    }
+
 }
 .pageTrans{
         height: 100vh;
@@ -48,51 +46,4 @@
         top: 0;
         left: 0;
         z-index: 500;
-    @media (max-width: $mobile-width) {
-      display: none;
-    }
-}
-
-.mobile {
-  height: auto;
-  width: 100vw;
-  background-color: black;
-  position: relative;
-
-
-  .MobNav {
-    top: 0%;
-    left: 0%;
-    position: fixed;
-    width: 100%;
-    height: 10vh;
-    background-color: $background;
-    z-index: 1;
-  }
-
-  .mVideo {
-    top: 0;
-    height: 100vh;
-    background-color: black;
-    position: relative;
-  }
-
-  .MobArticle {
-    margin-top: 3vh;
-    position: relative;
-    background-color: $background;
-    width: 100%;
-    height: auto;
-  }
-
-  .MobSubmission {
-    margin-top: 3vh;
-    position: relative;
-    background-color: $background;
-    width: 100%;
-    height: auto;
-  }
-  @media (min-width: $mobile-width) {
-    display: none;
-  }
 }

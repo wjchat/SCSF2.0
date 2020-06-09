@@ -5,14 +5,7 @@ import gsap from 'gsap'
 import{ useStaticQuery, graphql } from 'gatsby'
 
 const TopNav = props =>{
-    const data = useStaticQuery(graphql`
-    query AboutQuery {
-      strapiAbout {
-        text
-      }
-    }
-`)
-    const aboutText = data.strapiAbout.text
+    const aboutText = props.aboutText
     const [showAbout, updateShow] = useState(false);
     let animate
     useEffect(()=>{
