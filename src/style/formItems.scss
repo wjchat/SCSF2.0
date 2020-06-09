@@ -79,11 +79,23 @@ $formFontSize: 1.4vw;
       background-color: #060608;
       color: $goldX;
       transition: all .25s;
+
+      @media (max-width: $mobile-width) {
+        .submit:active {
+          background-color: $goldX;
+          color: #060608;
+        }
+      }
     }
     .submit:hover {
       background-color: $goldX;
-      color: #060608
+      color: #060608;
+      @media (max-width: $mobile-width) {
+        background-color: #060608;
+        color: $goldX;
+      }
     }
+
  
     .email {
         background-color: #060608;
@@ -94,6 +106,13 @@ $formFontSize: 1.4vw;
         input{
             height: 100%;
             text-indent: 1.5vw;
+        }
+        @media (max-width: $mobile-width) {
+          input {
+            text-indent: 4vw;
+            font-size: $formFontSize * 3.3;
+            font-family: $serrif;
+          }
         }
     }
     .email:focus {
@@ -124,6 +143,20 @@ $formFontSize: 1.4vw;
         color: $goldX;
       }
     }
+    @media (max-width: $mobile-width) {
+      & > div {
+        //container of each element
+        margin: 4% 0; //adjust space between boxes
+        width: 100%;
+        height: $formFontSize * 9.3;
+      }
+
+      .labelContainer {
+        //control text style from here
+        font-size: $formFontSize * 3.3;
+
+    }
+    }
   }
   
   .message{
@@ -140,4 +173,9 @@ $formFontSize: 1.4vw;
       justify-content: left;
       cursor: default;
       border: none;
+
+      @media (max-width: $mobile-width) {
+        justify-content: center;
+        font-size: $formFontSize * 3.3;
+      }
   }

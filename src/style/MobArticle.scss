@@ -1,0 +1,51 @@
+@import "global";
+
+.MobArticleContainer {
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  
+
+  .scsf {
+    font-family: $sans;
+    font-size: 15vw;
+    text-align: center;
+    color: $goldX;
+  }
+
+  .line {
+    position: relative;
+    height: 0.3vh;
+    width: 45vw;
+    background-color: $goldX;
+    margin-top: 3.5vh;
+    left: 27.5vw;
+  }
+
+  .titlesub {
+    position: relative;
+    font-size: 9vw;
+    font-family: garamond;
+    font-style: italic;
+    text-align: center;
+    color: $greyX;
+    margin-top: 8vh;
+    &>span{
+      color: $goldX;
+    }
+  }
+
+  .article {
+    padding-left: 8vw;
+    padding-right: 8vw;
+    text-align: center;
+    margin-top: 6vw;
+    font-family: $serrif;
+    font-size: 4.5vw;
+    line-height: 1.5;
+  }
+}
