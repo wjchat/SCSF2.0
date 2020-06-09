@@ -11,6 +11,7 @@ import { graphql } from "gatsby"
 import "../style/layout.css"
 import "../style/templateLayout.scss"
 
+
 const Page = props => {
     return (
         <div className="main">
@@ -26,7 +27,7 @@ const Page = props => {
                 />
             </div>
             <div className="video">
-                <Video video={props.volume.video.relativePath} />
+                <Video video={props.volume.vid[0].url} />
                 <PageTransition 
                 delayIn = {.2}
                 delayOut = {.2}
@@ -45,8 +46,8 @@ export const query = graphql`
             Title
             published
             typeContent
-            video {
-                relativePath
+            vid {
+                url
             }
         }
     }

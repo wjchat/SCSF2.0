@@ -11,6 +11,7 @@ const Video = props =>{
             }, 2000)
         }
     }, [vid])
+    console.log(props.video)
     return(
     <div className = "videoContainer">
         <video ref = {video=>vid=video} controls src={props.video}></video>

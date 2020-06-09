@@ -48,7 +48,6 @@ const NavSection = props =>{
 `)
     let duration = props.duration
     const items = data.allStrapiVolume.edges
-    console.log(items)
     let animate
     let titleRef
     const [message, updateMessage] = useState("So Close So Far");

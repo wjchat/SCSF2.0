@@ -19,8 +19,8 @@ exports.createPages = async ({ graphql, actions }) => {
                 Title
                 published
                 typeContent
-                video {
-                  relativePath
+                vid {
+                  url
                 }
             }
           }
