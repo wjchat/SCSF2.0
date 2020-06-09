@@ -1,5 +1,4 @@
 import React,{useEffect, useState} from 'react';
-import words from './articleText.js'
 import Form from './form.jsx'
 import "../style/MobSubmission.scss"
 import gsap from "gsap"
