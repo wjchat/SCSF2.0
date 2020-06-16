@@ -3,6 +3,10 @@
 $paddingSide: 8vw;
 $bodyText: 4.5vw;
 .mobile{
+    display: none;
+    @include mobile{
+        display: block;
+    }
     color: $greyX;
     .firstView{
         // background-color: blue;

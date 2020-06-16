@@ -4,7 +4,6 @@ import Form from './form.jsx'
 import Arrow from '../images/Arrow.svg'
 import {gsap, Power3} from "gsap"
 import axios from "axios"
-
 import ReactMarkdown from "react-markdown"
 import Moment from "react-moment"
 
@@ -20,56 +19,55 @@ const Article = props =>{
     const [scroll, updateScroll] = useState(null)
     const [count, updateCount] = useState(12)
     useEffect(()=>{
+        axios.get(api+'user-uploads/count')
+          .then(function (response) {
+            updateCount(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
         if(scrollRef!=null){
             let ting = scrollRef
-            setTimeout(()=>{
-                updateScroll(ting)
-                    axios.get(api+'user-uploads/count')
-                      .then(function (response) {
-                        updateCount(response.data);
-                      })
-                      .catch(function (error) {
-                        console.log(error);
-                      });
-            }, 300)
+            updateScroll(ting)
+            //allows content to load before giving scrollbar height
         }
     }, [scrollRef])
     useEffect(()=>{
         if(scroll != null){
-            props.updateContainer(scroll)
-            props.updateDivHeight(scroll.offsetHeight)
-            let instance = scroll;
-            let message = scroll.getElementsByClassName("scrollDown")[0]
-            props.updateArticleHeight(instance.getElementsByClassName("heightContainer")[0].offsetHeight)
-                instance.addEventListener("wheel", (e)=>{
-                    let totalHeight = instance.getElementsByClassName("heightContainer")[0].offsetHeight
-//                    console.log("total", totalHeight)
-                    let containerHeight = instance.offsetHeight
-//                    console.log("container", containerHeight)
-                    let adjustedHeight = totalHeight - containerHeight
-                    let scrollPos = Math.round(instance.scrollTop)
-//                    console.log("adjusted", adjustedHeight)
-//                    console.log("scroll", scrollPos)
-                    
-                    if(scrollPos < 10){
-                        props.updateScrollState("top")
-                        gsap.to(message, duration, {
-                            opacity: 1,
-                            filter: "blur(0px)",
-                        })
-                    } else if(scrollPos > adjustedHeight - 50){
-                          props.updateScrollState("bottom")    
-                    } else if(scrollPos > 10 && e.deltaY > 0){
-                        props.updateScrollState("scrolling")
-                        gsap.to(message, duration,{
-                            opacity: 0,
-                            filter: "blur(2px)",
-                        })
-                    } else if(scrollPos > 10 && e.deltaY < 0){
-                        props.updateScrollState("top")
-                    }
-                    
-                }, {passive:true})
+                props.updateContainer(scroll)
+                props.updateDivHeight(scroll.offsetHeight)
+                let instance = scroll;
+                let message = scroll.getElementsByClassName("scrollDown")[0]
+                props.updateArticleHeight(instance.getElementsByClassName("heightContainer")[0].clientHeight)
+                    instance.addEventListener("wheel", (e)=>{
+                        let totalHeight = instance.getElementsByClassName("heightContainer")[0].offsetHeight
+    //                    console.log("total", totalHeight)
+                        let containerHeight = instance.offsetHeight
+    //                    console.log("container", containerHeight)
+                        let adjustedHeight = totalHeight - containerHeight
+                        let scrollPos = Math.round(instance.scrollTop)
+    //                    console.log("adjusted", adjustedHeight)
+    //                    console.log("scroll", scrollPos)
+
+                        if(scrollPos < 10){
+                            props.updateScrollState("top")
+                            gsap.to(message, duration, {
+                                opacity: 1,
+                                filter: "blur(0px)",
+                            })
+                        } else if(scrollPos > adjustedHeight - 50){
+                              props.updateScrollState("bottom")    
+                        } else if(scrollPos > 10 && e.deltaY > 0){
+                            props.updateScrollState("scrolling")
+                            gsap.to(message, duration,{
+                                opacity: 0,
+                                filter: "blur(2px)",
+                            })
+                        } else if(scrollPos > 10 && e.deltaY < 0){
+                            props.updateScrollState("top")
+                        }
+
+                    }, {passive:true})
         }
     }, [scroll])
     useEffect(()=>{
@@ -104,8 +102,10 @@ const Article = props =>{
                     source ={props.content} />
                 </div>
             </div>
-            <div className = "caption">
-              We will be using the videos and images submitted to create an audio/visual journal for and by all of us
+            <div className = "caption article">
+                    <ReactMarkdown 
+                    source ={props.aboutSub} />
+                    <span className = "privacyPolicy"><a href = '/privacyPolicy' target = "_blank">Privacy Policy.</a></span>
             </div>
             <div className = "formContain">
                 <Form 
@@ -114,7 +114,7 @@ const Article = props =>{
             </div>
             <div className = "counter"><span>{count}</span> <br/>
              Stories Told</div>
-       </div>
+            </div>
     </div>)
 }
 

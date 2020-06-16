@@ -4,7 +4,7 @@ import "../style/video.scss"
 const Video = props =>{
     let vid
     useEffect(()=>{
-        if(vid!= null){
+        if(vid!= null && window.innerWidth > 450 && props.desktop ){
             let inst = vid
             setTimeout(()=>{
                 inst.play();
@@ -14,7 +14,7 @@ const Video = props =>{
 //    console.log(props.video)
     return(
     <div className = "videoContainer">
-        <video ref = {video=>vid=video} controls src={props.video}></video>
+        <video className = {props.className} ref = {video=>vid=video} controls src={props.video}></video>
     </div>
     )
 }

@@ -19,6 +19,9 @@
             opacity: 0;
 //            filter: blur(4px);
             transform: translateX(-0%) scale(0.9);
+            @include mobile{
+                width: 66vw;
+            }
         }
         .enter{
             @include bodyText;
@@ -29,15 +32,24 @@
             font-family: $sans;
             font-weight: 800;
             color: $greyX;
+            @include mobile{
+                font-size: 10vw;
+            }
             .enterClick{
                 cursor: pointer;
                 opacity: 1;
             }
             &>.first{
                 opacity: 1;
+                @include mobile{
+                    display: none;
+                }
             }
         }
         .ellipses{
+            @include mobile{
+                display: none;
+            }
             span{
                 opacity: 0,
             }

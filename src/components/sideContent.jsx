@@ -172,7 +172,8 @@ const SideContent = props => {
         duration = {duration}
         scrollState = {scrollState} /> 
         <Article 
-        updateDivHeight = {(height)=>updateDivHeight(height)}
+        aboutSub = {props.aboutSub}
+        updateDivHeight = {(item)=>updateDivHeight(item)}
         title = {props.volume.Title}
         subject = {props.volume.Subject} 
         content = {props.volume.typeContent}

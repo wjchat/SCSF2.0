@@ -1,34 +1,42 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, useCallback} from 'react';
 import "../style/MobNav.scss";
 import Logo from '../images/Matte.svg';
-import {gsap, Power2, Power1} from 'gsap'
+import {gsap, Power2, Power1, Power4} from 'gsap'
 import Swipe from 'react-easy-swipe';
 import MobileMenuItem from './MobileMenuItem.jsx'
 
 const VolumeSelector = props =>{
     let animate
-    const open = () =>{
-        gsap.to(animate, .4,{
-            x: "0%",
-            opacity: 1,
-            pointerEvents: "all",
-            ease: Power1.easeOut,
-        })
-        document.body.getElementsByTagName("video")[1].pause();
-
-    }
-    const close = (delay) => {
-        if(!delay){
-            delay = 0;
+    const [tween, updateTween] = useState(null);
+    useEffect(()=>{
+        if(animate){
+            let links = animate.getElementsByTagName("li")
+            let tl = gsap.timeline({paused: true});
+            tl.to(animate, .2,{
+                x: "0%",
+                pointerEvents: "all",
+                ease: Power1.easeIn,
+            })
+            tl.staggerTo(links, .2,{
+                x: 0,
+                opacity: 1,
+                ease: Power1.easeOut,
+            }, .02)
+            updateTween(tl)
         }
-        gsap.to(animate, .3, {
-            x: " -100%",
-            opacity: 0,
-            pointerEvents: "none",
-            ease: Power2.easeIn,
-            delay: delay,
-        })
-    }
+    }, [animate])
+    const open = useCallback(()=>{
+        if(tween){
+            tween.play();
+            document.body.getElementsByTagName("video")[1].pause();
+        }
+    }, [tween])
+
+    const close = useCallback(()=>{
+        if(tween){
+            tween.reverse();
+        }
+    }, [tween])
     return<>
         <span
         onClick = {()=>open()}
@@ -38,6 +46,7 @@ const VolumeSelector = props =>{
                <Swipe
                onSwipeLeft = {()=>close()}
                >
+               <li className = "tableOfContents">TABLE OF CONTENTS</li>
                 {props.volumesCount.map((item, i)=>
                                         <MobileMenuItem 
                                         open = {()=>open()}

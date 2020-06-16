@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react"
 import SEO from "../components/seo"
 
-import Landing from "../components/landing.jsx"
-import SubmissionPage from "../components/submission.jsx"
-import Mobile from '../components/mobile.jsx'
 import Head from "../components/head.jsx"
 import Logo from "../images/Matte.svg"
 import { TimelineMax, TweenLite, gsap, Power3 } from "gsap"
@@ -149,6 +146,7 @@ const Index = props =>{
     const [trigger, changePage] = useState(false);
 
     useEffect(()=>{
+        console.log("Website by Jed Spears <jed.spears7@gmail.com> & Will Chatterson <will@willchatterson.com>")
         if(animate!=null && fade != null){
             if(trigger){
                 let tl = gsap.timeline();

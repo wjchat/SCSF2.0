@@ -19,7 +19,7 @@ const Scrolly = props =>{
                 paused: true,
             }))
         }
-    }, [props.height, props.divHeight])
+    }, [props.height, props.divHeight, props.container])
     useEffect(()=>{
         if(props.container !=null && props.height != null && props.divHeight != null && tween != null){
                 props.container.addEventListener("scroll", ()=>{

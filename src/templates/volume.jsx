@@ -3,6 +3,7 @@ import Head from "../components/head.jsx"
 import SideContent from "../components/sideContent.jsx"
 import TopNav from "../components/topNav.jsx"
 import Video from "../components/video.jsx"
+import Footer from "../components/footer.jsx"
 import PageTransition from "../components/pageTransition.jsx"
 import { gsap, Power3 } from "gsap"
 import { graphql } from "gatsby"
@@ -27,6 +28,7 @@ const Page = props => {
             </div>
             <div className="sideContent">
                 <SideContent
+                  aboutSub = {props.aboutSub}
                    volumesCount = {props.volumesCount}
                     trigger = {props.trigger}
                     duration={props.duration}
@@ -35,13 +37,15 @@ const Page = props => {
                 />
             </div>
             <div className="video">
-                <Video video={props.volume.vid[0].url} />
+                <Video 
+                desktop = {true}
+                video={props.volume.vid[0].url} />
                 <PageTransition 
                 delayIn = {.2}
                 delayOut = {.2}
                 trigger = {props.trigger} />
             </div>
-            <div className="footer"></div>
+            <Footer />
         </div>
           <div className = "mobile">
                 <div className = "MobNav">
@@ -58,7 +62,12 @@ const Page = props => {
                 <MobArticle
                 volume={props.volume}
                 /></div>
-                <div className = "MobSubmission"><MobSubmission/></div>
+                <div className = "MobSubmission">
+                <MobSubmission
+                aboutSub = {props.aboutSub}
+                />
+                <Footer />
+                </div>
           </div>
         </>
     )
@@ -85,14 +94,16 @@ export const query = graphql`
             }
           }
           strapiAbout {
-            text
+            AboutTheProject
+            AboutSubmissions
           }
     }
 `
 
 const Container = ({ data }) => {
     const volume = data.strapiVolume
-    const aboutText = data.strapiAbout.text
+    const aboutText = data.strapiAbout.AboutTheProject
+    const aboutSub = data.strapiAbout.AboutSubmissions
     const volumesCount = data.allStrapiVolume.edges
     let animate
     const [duration, updateDuration] = useState(1)
@@ -101,6 +112,7 @@ const Container = ({ data }) => {
         <div>
             <Head />
             <Page
+              aboutSub = {aboutSub}
                volumesCount = {volumesCount}
                 trigger = {trigger}
                 duration={duration}
