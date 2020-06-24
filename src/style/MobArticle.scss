@@ -43,13 +43,22 @@
     padding-left: 8vw;
     padding-right: 8vw;
     text-align: center;
-    margin-top: 6vw;
     font-family: $serrif;
     font-size: 4.5vw;
     line-height: 1.5;
+    margin-top: 0;
       .content{
           text-align: left;
           color: $greyX;
+          p{
+              margin-bottom: 5vh;
+          }
+          img{
+              margin: 5vh 0;
+              margin-left: 2.5%;
+              width: 95%;
+              height: auto;
+          }
       }
   }
 }

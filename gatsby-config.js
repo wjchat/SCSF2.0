@@ -1,7 +1,6 @@
-//require("dotenv").config({  
-//  path: `.env.${process.env.NODE_ENV}`,
-//apiURL: "https://scsf.herokuapp.com",
-//})
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 
 module.exports = {
 pathPrefix: "/so-close-so-far-deploy",
@@ -24,7 +23,7 @@ pathPrefix: "/so-close-so-far-deploy",
         apiURL: "https://scsf.herokuapp.com",
         contentTypes: [
 //           List of the Content Types you want to be able to request from Gatsby.
-          "volume",
+          'volumes',
         ],
         singleTypes: [`about`],
         queryLimit: 1000,

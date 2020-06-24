@@ -11,8 +11,9 @@
         display: none;
     }
     img{
-        max-width: 90%;
+        max-width: 95%;
         max-height: 100%;
+        margin: 2vw 0;
     }
     .heightContainer{
         border: solid transparent 1px; //KEEP THIS idk why but for some reason it solves a problem
@@ -35,6 +36,9 @@
         width: 75%;
         line-height: 140%;
         font-size: 1rem;
+        p{
+            margin-bottom: 2vw;
+        }
     }
     .formContain{
         width: 66%;

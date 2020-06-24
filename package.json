@@ -6,7 +6,9 @@
     "version": "0.1.0",
     "author": "Jed Spears and Will Chatterson in collaboration with Matte Projects",
     "dependencies": {
+        "aws-sdk": "^2.703.0",
         "axios": "^0.19.2",
+        "fs": "^0.0.1-security",
         "gatsby": "^2.20.25",
         "gatsby-image": "^2.3.4",
         "gatsby-plugin-manifest": "^2.3.5",
@@ -20,7 +22,7 @@
         "gatsby-source-strapi": "^0.0.12",
         "gatsby-transformer-sharp": "^2.4.6",
         "gh-pages": "^2.2.0",
-        "gsap": "^3.2.6",
+        "gsap": "3.3.0",
         "moment": "^2.25.3",
         "node-sass": "^4.13.1",
         "prop-types": "^15.7.2",

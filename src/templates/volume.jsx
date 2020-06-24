@@ -39,7 +39,7 @@ const Page = props => {
             <div className="video">
                 <Video 
                 desktop = {true}
-                video={props.volume.vid[0].url} />
+                video={props.volume.vid} />
                 <PageTransition 
                 delayIn = {.2}
                 delayOut = {.2}
@@ -56,7 +56,7 @@ const Page = props => {
                 </div>
                 <div className = "mVideo">
                 <Video
-                video={props.volume.vid[0].url}
+                video={props.volume.vid}
                  /></div>
                 <div className = "MobArticle">
                 <MobArticle
@@ -75,17 +75,15 @@ const Page = props => {
 
 export const query = graphql`
     query ArticleQuery($id: Int!) {
-        strapiVolume(strapiId: { eq: $id }) {
+        strapiVolumes(strapiId: { eq: $id }) {
             strapiId
             Subject
             Title
             published
             typeContent
-            vid {
-                url
-            }
+            vid
         }          
-        allStrapiVolume(sort: {fields: strapiId, order: ASC}) {
+        allStrapiVolumes(sort: {fields: strapiId, order: ASC}) {
             edges {
               node {
                 Title
@@ -101,10 +99,10 @@ export const query = graphql`
 `
 
 const Container = ({ data }) => {
-    const volume = data.strapiVolume
+    const volume = data.strapiVolumes
     const aboutText = data.strapiAbout.AboutTheProject
     const aboutSub = data.strapiAbout.AboutSubmissions
-    const volumesCount = data.allStrapiVolume.edges
+    const volumesCount = data.allStrapiVolumes.edges
     let animate
     const [duration, updateDuration] = useState(1)
     const [trigger, changePage] = useState(false)

@@ -90,30 +90,38 @@
             height: 100%;
             position: absolute;
             transform: translateX(-100%);
+            color: rgba(255,255,255,.9);
             &>div{
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start;
                 width: 100%;
                 height: 100%;
+                padding-top: 15vh;
+                
+            }
+            .tableOfContents{
+                line-height: 110%;
+                text-align: left;
+                font-size: 15vw;
+                margin-bottom: 5vh;
             }
             li{
                 width: 100%;
-                padding: 2vh 4vw;
+                padding: 0vh 4vw;
                 margin: 1vh 0;
                 font-size: 6vw;
                 opacity: 0;
                 transform: translateX(-5px);
-                &.tableOfContents{
-                    font-size: 10vw;
-                }
+                font-size: 10vw;
                 a{
                     width: 100%;
                     height: 100%;
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
-                    &.active{
+                    padding-left: 1vw;
+                    &.active{  
                         span{
                             &:first-of-type{
                                 text-decoration: underline;
@@ -123,11 +131,27 @@
                 }
                 span{
                     width: 67%;
-                    text-align: center;
+                    text-align: left;
+                    margin-bottom: 2vh;
                     &:first-of-type{
-                        text-align: center;
                         width: 33%;
                     }
+                }
+            }
+            .swipeOut{
+                position: absolute;
+                bottom: 10vh;
+                right: 5vw;
+                width: fit-content;
+                list-style: none;
+                p{
+                    @include bodyText;
+                    font-size: 7vw;
+                    font-style: italic;
+                    opacity: .7;
+                }
+                img{
+                    max-height: 7.4vw;
                 }
             }
         }

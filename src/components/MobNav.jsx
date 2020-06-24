@@ -4,6 +4,7 @@ import Logo from '../images/Matte.svg';
 import {gsap, Power2, Power1, Power4} from 'gsap'
 import Swipe from 'react-easy-swipe';
 import MobileMenuItem from './MobileMenuItem.jsx'
+import arrow from "../images/leftArrow.svg"
 
 const VolumeSelector = props =>{
     let animate
@@ -46,13 +47,17 @@ const VolumeSelector = props =>{
                <Swipe
                onSwipeLeft = {()=>close()}
                >
-               <li className = "tableOfContents">TABLE OF CONTENTS</li>
+               <li className = "tableOfContents">TABLE OF<br/>CONTENTS</li>
                 {props.volumesCount.map((item, i)=>
                                         <MobileMenuItem 
                                         open = {()=>open()}
                                         close = {()=>close()}
                                         item = {item} />
                                        )} 
+                <li className = "swipeOut">
+                   <p>Swipe</p>
+                    <img src={arrow} alt=""/>
+                </ li>
                 </Swipe>
             </ul>
         </div>

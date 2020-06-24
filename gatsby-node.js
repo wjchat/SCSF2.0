@@ -11,7 +11,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(
     `
       {
-        volumes: allStrapiVolume {
+        volumes: allStrapiVolumes {
           edges {
             node {
                 strapiId
@@ -19,9 +19,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 Title
                 published
                 typeContent
-                vid {
-                  url
-                }
+                vid 
             }
           }
         }

@@ -2,23 +2,24 @@ import React, { useCallback, useState, useEffect } from "react"
 import { TimelineMax } from "gsap"
 import "../style/submission.scss"
 import "../style/formItems.scss"
-import arrow from '../images/Arrow.svg';
+import arrow from "../images/Arrow.svg"
 
-import { gsap, Power2 } from 'gsap'
-import { CSSPlugin } from 'gsap/CSSPlugin'
-import axios from 'axios'
+import { gsap, Power2 } from "gsap"
+import { CSSPlugin } from "gsap/CSSPlugin"
+import axios from "axios"
+import AWS from "aws-sdk"
+const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+})
 
 const localURL = "https://scsf.herokuapp.com/"
-
-
 
 // Force CSSPlugin to not get dropped during build
 gsap.registerPlugin(CSSPlugin)
 
 const gold = "#d3c371"
 const black = "black"
-
-const calcPercent = (value, total) => `${Math.round((value / total) * 100)}%`
 
 const Message = props => {
     return (
@@ -32,7 +33,7 @@ const X = props => {
     useEffect(() => {
         let tl = new TimelineMax()
         let duration = 0.15
-        
+
         tl.to(animate, duration, {
             opacity: 1,
             ease: "easeIn"
@@ -77,7 +78,7 @@ const FormContainer = props => {
         } else {
             updateFileLabel("Choose File")
         }
-    },[files])
+    }, [files])
 
     const setFile = event => {
         updateFile(event.target.files)
@@ -86,17 +87,15 @@ const FormContainer = props => {
         updateEmail(event.target.value)
     }
     const xClick = () => {
-      updateFile(null)
-      fileInput.value = ""
+        updateFile(null)
+        fileInput.value = ""
     }
     const clearMessage = () => {
-      updateMessage("")
+        updateMessage("")
     }
     const validateSubmit = useCallback(() => {
         if (email === null) {
-            updateMessage(
-                "Please enter your email."
-            )
+            updateMessage("Please enter your email.")
         } else if (
             /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) ===
             false
@@ -106,33 +105,54 @@ const FormContainer = props => {
             updateMessage("Please upload a photo or video.")
         } else {
             updateMessage(`This part doesn't work yet! U goof`)
-            handleSubmit();
+            handleSubmit()
         }
     })
-    const handleSubmit = async event =>{
-        updateMessage('Uploading...');
 
+    const handleSubmit = async event => {
+        updateMessage("Uploading...")
+        const percent = 0
         let fileItems = []
-        for(let each of files){
-            let data = new FormData()
-            data.append("files", each)
-            let upload_res = await axios({
-                method: "POST",
-                url: localURL + "upload",
-                data: data,
-                onUploadProgress: progress =>{
-                    updateMessage(`Uploading: ${calcPercent(progress.loaded, progress.total)}`)
-                }
-            })
-            fileItems.push(upload_res.data[0])
+        let currentItem=1
+        for (let each of files) {
+            console.log(each)
+            //            let data = new FormData()
+            //            data.append("files", each)
+
+            const params = {
+                Bucket: "scsf-matte", // pass your bucket name
+                Key: "userContent/" + each.name, // file will be saved as scsf-matte/userContent/filename
+                Body: each,
+                ACL: "public-read"
+            }
+            let upload = await s3
+                .upload(params, function(s3Err, each) {
+                    if (s3Err) throw s3Err
+                })
+                .on("httpUploadProgress", function(evt) {
+                    updateMessage(
+                        "Uploading... " +
+                            (Math.floor(parseInt((evt.loaded * 100) / evt.total) / files.length) * (currentItem)) +
+                            "%"
+                    )
+                })
+                .promise()
+
+            fileItems.push(upload.Location)
+            currentItem += 1
         }
-        console.log(fileItems[0])
+        let allFiles=""
+        for(let each of fileItems){
+            allFiles = allFiles + "   \n \n   " + each
+        }
+        console.log(allFiles);
+        console.log(fileItems);
         const userUpload = await axios({
             method: "POST",
             url: localURL + "user-uploads",
             data: {
                 email: email,
-                files: fileItems
+                files: ""
             }
         })
         updateMessage("Uploaded!")
@@ -142,30 +162,27 @@ const FormContainer = props => {
 
     return (
         <div className={props.className}>
-            <form ref = {div=>form=div} 
-               className="flexbox">
+            <form ref={div => (form = div)} className="flexbox">
                 <div className="email">
                     <div className="labelContainer">
                         <input
-                           ref = {input=>emailText = input}
+                            ref={input => (emailText = input)}
                             onClick={clearMessage}
                             onChange={setEmail.bind(this)}
                             type="text"
                             placeholder="Enter Email"
-                            className = "emailText"
+                            className="emailText"
                         />
                     </div>
                 </div>
-                <div 
-                    className= {files ? "fileActive" : "file"}
-                >
+                <div className={files ? "fileActive" : "file"}>
                     <input
                         ref={div => (fileInput = div)}
                         onClick={clearMessage}
                         onChange={setFile.bind(this)}
                         id="files"
                         type="file"
-                        accept = "video/*|image/*"
+                        accept="video/*|image/*"
                         multiple
                     />
                     <div
@@ -174,16 +191,9 @@ const FormContainer = props => {
                     >
                         <div className="label">{fileLabel}</div>
                     </div>
-                    {files != null ? (
-                        <X onClick={xClick} classname="x" />
-                    ) : (
-                        ""
-                    )}
+                    {files != null ? <X onClick={xClick} classname="x" /> : ""}
                 </div>
-                <div
-                    onClick={() => validateSubmit()}
-                    className="submit"
-                >
+                <div onClick={() => validateSubmit()} className="submit">
                     <div
                         ref={div => (submitBox = div)}
                         className="labelContainer"
@@ -191,7 +201,7 @@ const FormContainer = props => {
                         <div className="label">Submit</div>
                     </div>
                 </div>
-            <Message text={message} className="message" />
+                <Message text={message} className="message" />
             </form>
         </div>
     )

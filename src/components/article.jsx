@@ -3,16 +3,18 @@ import "../style/article.scss"
 import Form from './form.jsx'
 import Arrow from '../images/Arrow.svg'
 import {gsap, Power3} from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import axios from "axios"
 import ReactMarkdown from "react-markdown"
 import Moment from "react-moment"
 
+gsap.registerPlugin(ScrollTrigger);
+
 
 const api = "https://scsf.herokuapp.com/"
-
-
 const Article = props =>{
     let scrollRef;
+    let articleContent;
     const title = "Sex"
     const subject = "Josie Andrews"
     const duration = props.duration
@@ -28,7 +30,9 @@ const Article = props =>{
           });
         if(scrollRef!=null){
             let ting = scrollRef
-            updateScroll(ting)
+            setTimeout(()=>{
+                updateScroll(ting)
+            }, 500)
             //allows content to load before giving scrollbar height
         }
     }, [scrollRef])
@@ -85,6 +89,33 @@ const Article = props =>{
             }, -.05, `+=.4`)
         }
     }, [scroll])
+    
+    //create scroll effect for images
+    useEffect(()=>{
+        if(articleContent){
+            let images = articleContent.getElementsByTagName("img");
+            for(let each of images){ 
+                    gsap.set(each, {
+                        opacity: 0,
+                        y: `${each.clientHeight * -.3}`,
+                        scale: .9,
+                    })
+                    gsap.to(each, {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        scrollTrigger: {
+                            once: true,
+                            scroller: scrollRef,
+                            trigger: each,
+                            start: "top bottom",
+                            end: `+=${each.clientHeight * 1.3}`,
+                            scrub: .1,
+                        }
+                    })
+                }
+            }
+    }, [articleContent])
     return(<div 
       ref = {div=>scrollRef=div}
         className = "articleContainer">
@@ -96,8 +127,7 @@ const Article = props =>{
             <div 
                 className = "article">
                <p className = "animateThis"><Moment format = "MMM Do, YYYY">{props.published}</Moment></p>
-               <br/>
-               <div className = "animateThis">
+               <div ref = {div=>articleContent=div} className = "animateThis">
                     <ReactMarkdown 
                     source ={props.content} />
                 </div>

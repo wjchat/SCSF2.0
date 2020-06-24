@@ -43,7 +43,7 @@ const DotDotDot = () =>{
 const EnterButton = props => {
     const data = useStaticQuery(graphql`
     query CountQueryFront{
-      allStrapiVolume {
+      allStrapiVolumes {
         totalCount
       }
     }
@@ -89,7 +89,7 @@ const EnterButton = props => {
                 entry ={{
                         delay: duration,
                     }}
-                to = {`/volume/${data.allStrapiVolume.totalCount}`
+                to = {`/volume/${data.allStrapiVolumes.totalCount}`
                      }>enter</TransitionLink>
             </span>
             {isHovering ? <DotDotDot /> : <span className="first"> . </span>}
