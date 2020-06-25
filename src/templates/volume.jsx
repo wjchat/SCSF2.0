@@ -6,6 +6,7 @@ import Video from "../components/video.jsx"
 import Footer from "../components/footer.jsx"
 import PageTransition from "../components/pageTransition.jsx"
 import { gsap, Power3 } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { graphql } from "gatsby"
 
 import MobNav from "../components/MobNav.jsx"
@@ -15,6 +16,9 @@ import MobSubmission from "../components/MobSubmission.jsx"
 
 import "../style/layout.css"
 import "../style/templateLayout.scss"
+
+gsap.registerPlugin(ScrollTrigger);
+let ting = ScrollTrigger
 
 
 const Page = props => {

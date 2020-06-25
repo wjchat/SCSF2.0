@@ -93,27 +93,32 @@ const Article = props =>{
     //create scroll effect for images
     useEffect(()=>{
         if(articleContent){
-            let images = articleContent.getElementsByTagName("img");
-            for(let each of images){ 
+            let artTing = articleContent
+                let images = artTing.getElementsByTagName("img");
+                for(let each of images){ 
                     gsap.set(each, {
                         opacity: 0,
-                        y: `${each.clientHeight * -.3}`,
+                        y: `${each.clientHeight * -.1}`,
                         scale: .9,
                     })
-                    gsap.to(each, {
-                        opacity: 1,
-                        y: 0,
-                        scale: 1,
-                        scrollTrigger: {
-                            once: true,
-                            scroller: scrollRef,
-                            trigger: each,
-                            start: "top bottom",
-                            end: `+=${each.clientHeight * 1.3}`,
-                            scrub: .1,
-                        }
-                    })
                 }
+                setTimeout(()=>{
+                    for(let each of images){
+                        gsap.to(each, {
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            scrollTrigger: {
+                                once: true,
+                                scroller: ".articleContainer",
+                                trigger: each,
+                                start: "top bottom",
+                                end: `+=${each.clientHeight * 1.3}`,
+                                scrub: .1,
+                            }
+                        })
+                    }
+                }, 500)
             }
     }, [articleContent])
     return(<div 

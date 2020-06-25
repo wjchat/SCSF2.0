@@ -8,13 +8,16 @@ import "../style/loader.scss"
 import { useStaticQuery, graphql } from "gatsby"
 import TransitionLink from "gatsby-plugin-transition-link"
 import { TransitionPortal } from "gatsby-plugin-transition-link";
-
 import { CSSPlugin } from 'gsap/CSSPlugin'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 
 
 // Force CSSPlugin to not get dropped during builds
+gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CSSPlugin)
-
+let ting= CSSPlugin
+let scrollTing = (ScrollTrigger)
 
 const duration = 1;
 
