@@ -17,7 +17,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CSSPlugin)
 let ting= CSSPlugin
-let scrollTing = (ScrollTrigger)
+let scrollTing = ScrollTrigger
 
 const duration = 1;
 

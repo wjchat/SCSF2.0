@@ -3,12 +3,13 @@ import "../style/article.scss"
 import Form from './form.jsx'
 import Arrow from '../images/Arrow.svg'
 import {gsap, Power3} from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import axios from "axios"
 import ReactMarkdown from "react-markdown"
 import Moment from "react-moment"
 
 gsap.registerPlugin(ScrollTrigger);
+let ting = ScrollTrigger;
 
 
 const api = "https://scsf.herokuapp.com/"
