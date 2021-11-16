@@ -6,7 +6,7 @@
     "version": "0.1.0",
     "author": "Jed Spears and Will Chatterson in collaboration with Matte Projects",
     "dependencies": {
-        "aws-sdk": "^2.703.0",
+        "aws-sdk": "^2.814.0",
         "axios": "^0.19.2",
         "fs": "^0.0.1-security",
         "gatsby": "^2.20.25",
